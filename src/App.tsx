@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Route, Switch } from 'react-router-dom';
 import {Navigation} from "./components/Navigation/Navigation";
@@ -6,6 +6,7 @@ import { FindPage } from './components/FindPage/FindPage';
 import Error404 from './components/Error404/Error404';
 import {FavoritesPage} from "./components/FavoritesPage/FavoritesPage";
 import {Header} from "./components/Header/Header";
+import {photoAPI} from "./api/api";
 
 
 // PATH
@@ -16,6 +17,12 @@ export const FAVORITES_PATH = "/favorites";
 
 
 const App=()=> {
+
+    useEffect(()=>{
+    photoAPI.getPhotos("car")
+    },[])
+
+
   return (
       <div className="App">
         {/*//hr provider*/}
