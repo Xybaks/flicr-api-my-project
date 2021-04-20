@@ -1,33 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
+import {Navigation} from "./components/Navigation/Navigation";
+import { FindPage } from './components/FindPage/FindPage';
+import Error404 from './components/Error404/Error404';
+import {FavoritesPage} from "./components/FavoritesPage/FavoritesPage";
+import {Header} from "./components/Header/Header";
 
 
 // PATH
-export const LOGIN_PATH = "/login";
-export const REGISTER_PATH = "/register";
-export const PROFILE_PATH = "/profile";
-export const RESTORE_PASS_PATH = "/restore-pass";
-export const ENTER_PASS_PATH = "/enter-pass";
-export const TEST_PAGE_PATH = "/test";
+export const FIND_IMAGE_PATH = "/find";
+export const FAVORITES_PATH = "/favorites";
+
+
 
 
 const App=()=> {
   return (
       <div className="App">
         {/*//hr provider*/}
-        <Main/>
+        <Navigation/>
         <div>
-          {/*<Header/>*/}
+          <Header/>
           <Switch>
-            <Route exact path={"/"} render={() => <Profile/>}/>
-            <Route path={LOGIN_PATH} render={() => <Login/>}/>
-            <Route path={REGISTER_PATH} render={() => <Register/>}/>
-            <Route path={PROFILE_PATH} render={() => <Profile/>}/>
-            <Route path={RESTORE_PASS_PATH} render={() => <RestorePassword/>}/>
-            <Route path={ENTER_PASS_PATH} render={() => <EnterPassword/>}/>
-            <Route path={TEST_PAGE_PATH} render={() => <TestPage/>}/>
+            <Route exact path={"/"} render={() =>
+                <FindPage/>}
+            />
+            <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
+            <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
             <Route render={() => <Error404/>}/>
           </Switch>
         </div>
