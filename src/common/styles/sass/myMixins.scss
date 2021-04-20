@@ -1,0 +1,22 @@
+@import "./variables";
+
+@mixin text($colorText,$fontFamily,$fontSize,$lineHeight: normal,$fontWeight: auto,$letterSpacing: normal){
+  font-family: $fontFamily,serif;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+  color: $colorText;
+  font-weight: $fontWeight;
+  letter-spacing:$letterSpacing;
+
+}
+
+@mixin container(){
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+

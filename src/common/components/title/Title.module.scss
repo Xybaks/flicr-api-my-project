@@ -1,0 +1,24 @@
+@import "../../styles/sass/variables";
+@import "../../styles/sass/myMixins";
+
+
+.title {
+  display: flex;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  @include text($mainColor,poppins,35px,normal,600,3px);
+  &::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 2px;
+    bottom: -25px;
+    background: $mainColor;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    margin-bottom: 20px;
+  }
+}
+
+

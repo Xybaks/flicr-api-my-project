@@ -1,0 +1,3 @@
+.navBlock:not(:first-child):not(:last-child) {
+    margin: 10px;
+}
