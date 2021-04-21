@@ -2,7 +2,7 @@
   "name": "flicr-api-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Xybaks.github.io/flicr-api-my-project",
+  "homepage": "https://Xybaks.github.iyarno/flicr-api-my-project",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.4",
