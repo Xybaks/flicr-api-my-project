@@ -11,8 +11,8 @@ export const Photo: FC<PhotoPropsType> = (props) => {
     return (
         <div>
         <div style={{
-            width: "500px",
-            height: "250px",
+            width: "330px",
+            height: "200px",
             backgroundImage: `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
         }}>
         </div>

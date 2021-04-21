@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../state/reduxStore";
 import {Photo} from "./Photo/Photo";
 import React, {ChangeEvent, useState} from "react";
-import {IconButton, TextField, FormHelperText} from "@material-ui/core";
+import {IconButton, TextField} from "@material-ui/core";
 import {getPhotos, InitialStatePhotosReducerType} from "../../state/photosReducer";
 
 
@@ -10,7 +10,8 @@ export const FindPage = () => {
     const photoPage = useSelector<AppRootStateType, InitialStatePhotosReducerType>(state => state.photos)
     const dispatch = useDispatch()
     const [title, setTitle] = useState("")
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>("Please, add name to find image")
+
 
     const inputNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
@@ -26,7 +27,7 @@ export const FindPage = () => {
         if (title.trim() !== "") {
             dispatch(getPhotos(title))
         } else {
-            setError("Please, add title of image ")
+            setError("Please, add name to find image")
         }
     }
 
@@ -44,6 +45,9 @@ export const FindPage = () => {
             />
 
             <IconButton onClick={findPhotoHandler}>FIND</IconButton>
+            {/*error of empty result of search*/}
+            {!photoPage.isGettingPhotosSuccess && <div>not found</div>}
+
             {photoPage.photo.map(ph =>
                 <Photo
                     key={ph.id}

@@ -18,7 +18,7 @@ export type PhotoInStoreType = {
     secret: string
     server: string
     title: string
-    tags:Array <string>
+    tags: Array<string>
 }
 
 export type InitialStatePhotosReducerType = {
@@ -41,7 +41,7 @@ const initialState: InitialStatePhotosReducerType = {
     perpage: 0,
     total: "",
     photo: [],
-    isGettingPhotosSuccess: false,
+    isGettingPhotosSuccess: true,
     isGettingPhotosProgress: false,
     gettingPhotosError: ""
 }
@@ -51,7 +51,11 @@ export const photosReducer =
     (state = initialState, action: PhotosReducerActionsType): InitialStatePhotosReducerType => {
         switch (action.type) {
             case SET_PHOTOS:
-                return {...state, photo: action.photos.map(p => ({...p, tags: []}))}
+                return {
+                    ...state,
+                    photo: action.photos.map(p => ({...p, tags: []})),
+                        isGettingPhotosSuccess: action.photos.length!== 0
+                }
             case SET_PHOTOS_IS_GETTING_PROGRESS:
                 return {...state, isGettingPhotosProgress: action.isGettingPhotosProgress}
             case SET_SEARCH_NAME:
@@ -59,7 +63,7 @@ export const photosReducer =
             case ADD_TAG:
                 return {
                     ...state,
-                    photo: state.photo.map (p =>({...p, tags: [...p.tags,action.tag]}))
+                    photo: state.photo.map(p => ({...p, tags: [...p.tags, action.tag]}))
                 }
 
             default:
@@ -72,7 +76,7 @@ export const setPhotos = (photos: Array<PhotoType>) => ({type: SET_PHOTOS, photo
 export const setIsGettingPhotosProgress = (isGettingPhotosProgress: boolean) =>
     ({type: SET_PHOTOS_IS_GETTING_PROGRESS, isGettingPhotosProgress} as const);
 export const setSearchName = (searchName: string) => ({type: SET_SEARCH_NAME, searchName} as const);
-export const addTag = (id:string,tag: string) => ({type: ADD_TAG,id, tag} as const);
+export const addTag = (id: string, tag: string) => ({type: ADD_TAG, id, tag} as const);
 
 //ThunksCreators
 export const getPhotos = (text: string): ThunkType =>
