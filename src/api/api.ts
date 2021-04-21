@@ -11,8 +11,6 @@ export const photoAPI = {
             .then((r)=>{
                 console.log(r.data)
                 return r.data
-            }, (e)=>{
-                console.warn(e.data)
             })
     }
 }
@@ -27,7 +25,7 @@ export type GetPhotosResponseType = {
         photo:Array<PhotoType>
     }
 }
-type PhotoType={
+export type PhotoType={
     farm: number
     id: string
     isfamily: number

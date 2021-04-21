@@ -4,14 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter} from "react-router-dom";
+import {store} from "./state/reduxStore";
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
-  <React.StrictMode>
-      <HashRouter>
-    <App />
-          </HashRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        {/*<HashRouter> more stable in gh-pages*/}
+        <HashRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </HashRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
