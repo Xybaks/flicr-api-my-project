@@ -18,9 +18,10 @@ const App=()=> {
 
   return (
       <div className="App">
-        <Navigation/>
+
         <div>
           <Header/>
+            <Navigation/>
           <Switch>
             <Route exact path={"/"} render={() =>
                 <FindPage/>}

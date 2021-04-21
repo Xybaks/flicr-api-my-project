@@ -6,7 +6,8 @@ import {ThunkDispatch} from "redux-thunk";
 const SET_PHOTOS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS";
 const SET_PHOTOS_IS_GETTING_PROGRESS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS-IS-GETTING-PROGRESS";
 const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
-const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD_TAG";
+const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
+
 
 export type PhotoInStoreType = {
     farm: number
@@ -31,7 +32,6 @@ export type InitialStatePhotosReducerType = {
     isGettingPhotosSuccess: boolean,
     isGettingPhotosProgress: boolean, // true, if loading of photos is in progress
     gettingPhotosError: string
-
 }
 
 const initialState: InitialStatePhotosReducerType = {

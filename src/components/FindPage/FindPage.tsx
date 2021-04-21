@@ -4,6 +4,7 @@ import {Photo} from "./Photo/Photo";
 import React, {ChangeEvent, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
 import {getPhotos, InitialStatePhotosReducerType} from "../../state/photosReducer";
+import ProgressIndicator from "../../common/components/ProgressIndicator";
 
 
 export const FindPage = () => {
@@ -29,6 +30,10 @@ export const FindPage = () => {
         } else {
             setError("Please, add name to find image")
         }
+    }
+
+    if(photoPage.isGettingPhotosProgress){
+        return <ProgressIndicator/>
     }
 
     return (
