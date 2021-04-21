@@ -59,7 +59,7 @@ export const getPhotos = (text: string): ThunkType =>
         dispatch(setIsGettingPhotosProgress(true));
         const data = await photoAPI.getPhotos(text);
         if (data.stat === "ok") {
-            setPhotos(data.photos.photo)
+            dispatch(setPhotos(data.photos.photo))
         }
         dispatch(setIsGettingPhotosProgress(false));
     }
