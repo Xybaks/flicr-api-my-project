@@ -6,7 +6,6 @@ import { FindPage } from './components/FindPage/FindPage';
 import Error404 from './components/Error404/Error404';
 import {FavoritesPage} from "./components/FavoritesPage/FavoritesPage";
 import {Header} from "./components/Header/Header";
-import {photoAPI} from "./api/api";
 import {getPhotos} from "./state/photosReducer";
 import {useDispatch} from "react-redux";
 
@@ -19,10 +18,10 @@ export const FAVORITES_PATH = "/favorites";
 
 
 const App=()=> {
-const dispatch= useDispatch()
-    useEffect(()=>{
-        dispatch(getPhotos("car"))
-    },[dispatch])
+// const dispatch= useDispatch()
+//     useEffect(()=>{
+//         dispatch(getPhotos("car"))
+//     },[dispatch])
 
 
   return (

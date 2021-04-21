@@ -3,7 +3,7 @@ import {AppRootStateType} from "../../state/reduxStore";
 import {Photo} from "./Photo/Photo";
 import React, {ChangeEvent, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
-import {InitialStatePhotosReducerType, setSearchName} from "../../state/photosReducer";
+import {getPhotos, InitialStatePhotosReducerType, setSearchName} from "../../state/photosReducer";
 
 
 export const FindPage = () => {
@@ -17,13 +17,12 @@ export const FindPage = () => {
 
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         // if (error !== null) setError(null)
-        if (e.key === "Enter") addItem()
+        if (e.key === "Enter") findPhotoHandler()
     }
 
-    const addItem = () => {
+    const findPhotoHandler = () => {
         if (title.trim() !== "") {
-            dispatch(setSearchName(title))
-            setTitle("");
+            dispatch(getPhotos(title))
         }
     }
 
@@ -36,7 +35,7 @@ export const FindPage = () => {
                 onKeyPress={onKeyPressHandler}
                 variant="outlined"
             />
-            <IconButton onClick={addItem}>FIND</IconButton>
+            <IconButton onClick={findPhotoHandler}>FIND</IconButton>
             {photoPage.photo.map(ph =>
                 <Photo photo={ph}/>)}
         </div>
