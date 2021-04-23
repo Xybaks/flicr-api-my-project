@@ -1,5 +1,5 @@
-// import React from 'react';
-import './App.css';
+
+import style from './App.module.scss';
 import {Route, Switch } from 'react-router-dom';
 import {Navigation} from "./components/Navigation/Navigation";
 import { FindPage } from './components/FindPage/FindPage';
@@ -17,19 +17,28 @@ export const FAVORITES_PATH = "/favorites";
 const App=()=> {
 
   return (
-      <div className="App">
-
-        <div>
-          <Header/>
-            <Navigation/>
-          <Switch>
-            <Route exact path={"/"} render={() =>
-                <FindPage/>}
-            />
-            <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
-            <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
-            <Route render={() => <Error404/>}/>
-          </Switch>
+      <div className={style.app}>
+        <div className={style.appHeader} >
+          <Header />
+           <div className={style.table}>
+               <Navigation/>
+               <Switch>
+                   <Route exact path={"/"} render={() =>
+                       <FindPage/>}
+                   />
+                   <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
+                   <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
+                   <Route render={() => <Error404/>}/>
+               </Switch>
+           </div>
+          {/*<Switch>*/}
+          {/*  <Route exact path={"/"} render={() =>*/}
+          {/*      <FindPage/>}*/}
+          {/*  />*/}
+          {/*  <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>*/}
+          {/*  <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>*/}
+          {/*  <Route render={() => <Error404/>}/>*/}
+          {/*</Switch>*/}
         </div>
       </div>
   );

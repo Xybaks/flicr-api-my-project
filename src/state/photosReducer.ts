@@ -7,6 +7,7 @@ const SET_PHOTOS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS";
 const SET_PHOTOS_IS_GETTING_PROGRESS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS-IS-GETTING-PROGRESS";
 const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
 const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
+const DELETE_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/DELETE-TAG";
 
 
 export type PhotoInStoreType = {
@@ -54,16 +55,46 @@ export const photosReducer =
                 return {
                     ...state,
                     photo: action.photos.map(p => ({...p, tags: []})),
-                        isGettingPhotosSuccess: action.photos.length!== 0
+                    isGettingPhotosSuccess: action.photos.length !== 0
                 }
             case SET_PHOTOS_IS_GETTING_PROGRESS:
                 return {...state, isGettingPhotosProgress: action.isGettingPhotosProgress}
             case SET_SEARCH_NAME:
                 return {...state, searchName: action.searchName}
             case ADD_TAG:
+
+
                 return {
                     ...state,
-                    photo: state.photo.map(p => ({...p, tags: [...p.tags, action.tag]}))
+                    photo: state.photo.map(
+                        p => (
+                            (p.id === action.id && !p.tags.includes(action.tag,)) // check for  adding duplicate tag
+                                ?
+                                {
+                                    ...p,
+                                    tags:[...p.tags, action.tag]
+                                }
+                                : p)
+                    )
+                }
+            case DELETE_TAG:
+                return {
+                    ...state,
+                    photo: state.photo.map(
+                        p => {
+                            if (p.id === action.id) {
+                                let tagIndex=p.tags.indexOf(action.tag,0) // to find index of tag
+                                let newtags=[...p.tags] // copy for splice
+                                if (tagIndex>-1)
+                                    newtags.splice(tagIndex, 1)
+                                return {
+                                    ...p
+                                    ,
+                                    tags:newtags
+                                }
+                            } else return p
+                        }
+                    )
                 }
 
             default:
@@ -77,6 +108,7 @@ export const setIsGettingPhotosProgress = (isGettingPhotosProgress: boolean) =>
     ({type: SET_PHOTOS_IS_GETTING_PROGRESS, isGettingPhotosProgress} as const);
 export const setSearchName = (searchName: string) => ({type: SET_SEARCH_NAME, searchName} as const);
 export const addTag = (id: string, tag: string) => ({type: ADD_TAG, id, tag} as const);
+export const deleteTag = (id: string, tag: string) => ({type: DELETE_TAG, id, tag} as const);
 
 //ThunksCreators
 export const getPhotos = (text: string): ThunkType =>
@@ -93,10 +125,10 @@ type setPhotosActionType = ReturnType<typeof setPhotos>
 type setIsGettingPhotosProgressActionType = ReturnType<typeof setIsGettingPhotosProgress>
 type setSearchNameActionType = ReturnType<typeof setSearchName>
 type addTagActionType = ReturnType<typeof addTag>
-
-//
+type deleteTagActionType = ReturnType<typeof deleteTag>
 
 
 // common ActionType of this reducer
 export type PhotosReducerActionsType =
     setPhotosActionType | setIsGettingPhotosProgressActionType | setSearchNameActionType | addTagActionType
+    | deleteTagActionType

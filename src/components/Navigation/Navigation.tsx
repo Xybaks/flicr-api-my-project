@@ -7,9 +7,12 @@ export const Navigation = () => {
 
     return (
         <div>
+            <div>
             <NavLink className={styles.navBlock} to={FIND_IMAGE_PATH}>find image</NavLink>
+            </div>
+            <div>
             <NavLink className={styles.navBlock} to={FAVORITES_PATH}>favorites</NavLink>
-
+            </div>
         </div>
     );
 }
