@@ -16,7 +16,8 @@ export const FAVORITES_PATH = "/favorites";
 
 
 const App=()=> {
-    photoAPI.getOnePhoto()
+    // photoAPI.getOnePhoto()
+
   return (
       <div className={style.app}>
         <div className={style.appHeader} >

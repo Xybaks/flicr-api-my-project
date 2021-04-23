@@ -68,7 +68,7 @@ export const photosReducer =
                     ...state,
                     photo: state.photo.map(
                         p => (
-                            (p.id === action.id && !p.tags.includes(action.tag,)) // check for  adding duplicate tag
+                            (p.id === action.id && !p.tags.includes(action.tag)) // check for  adding duplicate tag
                                 ?
                                 {
                                     ...p,
@@ -128,7 +128,7 @@ type addTagActionType = ReturnType<typeof addTag>
 type deleteTagActionType = ReturnType<typeof deleteTag>
 
 
-// common ActionType of this reducer
+// common ActionsType of this reducer
 export type PhotosReducerActionsType =
     setPhotosActionType | setIsGettingPhotosProgressActionType | setSearchNameActionType | addTagActionType
     | deleteTagActionType

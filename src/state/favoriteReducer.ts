@@ -1,24 +1,25 @@
 import {photoAPI, PhotoType} from "../api/api";
 import {ActionsType, AppRootStateType, ThunkType} from "./reduxStore";
 import {ThunkDispatch} from "redux-thunk";
+import {PhotoInStoreType} from "./photosReducer";
+
 
 // for actions names
+const SET_PHOTO_TO_FAVORITE = "FLICR-API/FAVORITE-REDUCER/SET_F_PHOTO";
+const DELETE_PHOTO_FROM_FAVORITE = "FLICR-API/FAVORITE-REDUCER/DELETE-F-PHOTO";
 
-const SET_PHOTO_TO_FAVORITE = "FLICR-API-MY-Project/FAVORITE-REDUCER/ADD-PHOTO_TO-FAVORITE";
 
-
-export type favoritePhotoType = {
-    favoritePhotoId: string
-    tags: Array<string>
-
+export type FavoritePhotoType = {
+    favoritePhotoId: string,
+    favoritePhoto: PhotoInStoreType
 }
 
 export type InitialStateFavoriteReducerType = {
-    favoriteIDs: Array<string>
-  }
+    favorite: Array<FavoritePhotoType>
+}
 
-const initialState: InitialStateFavoriteReducerType = {
-   favoriteIDs: []
+const initialState:InitialStateFavoriteReducerType = {
+   favorite:[]
 }
 
 
@@ -29,7 +30,13 @@ export const favoriteReducer =
             case SET_PHOTO_TO_FAVORITE:
                 return {
                     ...state,
+                    favorite: [...state.favorite,{favoritePhotoId:action.id,favoritePhoto:action.photoInfo}
+                        ]
                    }
+                return {
+                    ...state,
+                    favorite:  state.favorite.filter(favPhoto=>favPhoto.favoritePhotoId!==action.id)
+                }
 
             default:
                 return state
@@ -37,7 +44,10 @@ export const favoriteReducer =
     }
 //ActionCreators
 
-export const setPhotoToFavorite = (id: string, tag: string) => ({type: SET_PHOTO_TO_FAVORITE, id, tag} as const);
+export const setPhotoToFavorite = ( id: string, photoInfo: PhotoInStoreType) => (
+    {type: SET_PHOTO_TO_FAVORITE, id, photoInfo} as const);
+export const deletePhotoFromFavorite = ( id: string) => (
+    {type: DELETE_PHOTO_FROM_FAVORITE, id} as const);
 
 //ThunksCreators
 // export const getPhotos = (text: string): ThunkType =>
@@ -54,6 +64,6 @@ export const setPhotoToFavorite = (id: string, tag: string) => ({type: SET_PHOTO
 type SetPhotoToFavoriteActionType = ReturnType<typeof setPhotoToFavorite>
 
 
-// common ActionType of this reducer
+// common ActionsType of this reducer
 export type FavoriteReducerActionsType =
     SetPhotoToFavoriteActionType
