@@ -18,8 +18,8 @@ export type InitialStateFavoriteReducerType = {
     favorite: Array<FavoritePhotoType>
 }
 
-const initialState:InitialStateFavoriteReducerType = {
-   favorite:[]
+const initialState: InitialStateFavoriteReducerType = {
+    favorite: []
 }
 
 
@@ -30,40 +30,47 @@ export const favoriteReducer =
             case SET_PHOTO_TO_FAVORITE:
                 return {
                     ...state,
-                    favorite: [...state.favorite,{favoritePhotoId:action.id,favoritePhoto:action.photoInfo}
-                        ]
-                   }
+                    favorite: [
+                        ...state.favorite, {
+                            favoritePhotoId: action.favoritePhotoId,
+                            favoritePhoto: action.favoritePhoto
+                        }
+                    ]
+                }
+            case DELETE_PHOTO_FROM_FAVORITE:
                 return {
                     ...state,
-                    favorite:  state.favorite.filter(favPhoto=>favPhoto.favoritePhotoId!==action.id)
+                    favorite: state.favorite.filter(favPhoto => favPhoto.favoritePhotoId !== action.id)
                 }
-
             default:
                 return state
         }
     }
 //ActionCreators
 
-export const setPhotoToFavorite = ( id: string, photoInfo: PhotoInStoreType) => (
-    {type: SET_PHOTO_TO_FAVORITE, id, photoInfo} as const);
-export const deletePhotoFromFavorite = ( id: string) => (
+export const setPhotoToFavorite = (favoritePhotoId: string, favoritePhoto: PhotoInStoreType) => (
+    {type: SET_PHOTO_TO_FAVORITE, favoritePhotoId, favoritePhoto} as const);
+export const deletePhotoFromFavorite = (id: string) => (
     {type: DELETE_PHOTO_FROM_FAVORITE, id} as const);
 
-//ThunksCreators
-// export const getPhotos = (text: string): ThunkType =>
-//     async (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
-//         dispatch(setIsGettingPhotosProgress(true));
-//         const data = await photoAPI.getPhotos(text);
-//         if (data.stat === "ok") {
-//             dispatch(setPhotos(data.photos.photo))
-//         }
-//         dispatch(setIsGettingPhotosProgress(false));
-//     }
+// ThunksCreators
+export const addPhotoToFavorite = (favoritePhotoId: string, favoritePhoto: PhotoInStoreType): ThunkType =>
+    async (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
+        dispatch(setPhotoToFavorite(favoritePhotoId, favoritePhoto));
+        // if LocaleStorage was disabled
+try {
+    localStorage.setItem(favoritePhotoId, JSON.stringify(favoritePhoto))
+}catch {
+    console.log( "image can't be added to LocaleStorage")
+}
+    }
+
 //ActionTypes
 
 type SetPhotoToFavoriteActionType = ReturnType<typeof setPhotoToFavorite>
+type deletePhotoFromFavoriteActionType = ReturnType<typeof deletePhotoFromFavorite>
 
 
 // common ActionsType of this reducer
 export type FavoriteReducerActionsType =
-    SetPhotoToFavoriteActionType
+    SetPhotoToFavoriteActionType | deletePhotoFromFavoriteActionType
