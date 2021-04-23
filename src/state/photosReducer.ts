@@ -85,7 +85,7 @@ export const photosReducer =
                             if (p.id === action.id) {
                                 let tagIndex=p.tags.indexOf(action.tag,0) // to find index of tag
                                 let newtags=[...p.tags] // copy for splice
-                                if (tagIndex>-1)
+                                if (tagIndex>-1)    // no possibility to use 2 several same tags
                                     newtags.splice(tagIndex, 1)
                                 return {
                                     ...p

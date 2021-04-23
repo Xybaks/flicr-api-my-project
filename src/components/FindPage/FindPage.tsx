@@ -11,7 +11,7 @@ export const FindPage = () => {
     const photoPage = useSelector<AppRootStateType, InitialStatePhotosReducerType>(state => state.photos)
     const dispatch = useDispatch()
     const [title, setTitle] = useState("")
-    const [error, setError] = useState<string | null>("Please, add name to find image")
+    const [error, setError] = useState<string | null>("")
 
 
     const inputNameHandler = (e: ChangeEvent<HTMLInputElement>) => {

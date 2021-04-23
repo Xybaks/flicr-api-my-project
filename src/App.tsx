@@ -6,6 +6,7 @@ import { FindPage } from './components/FindPage/FindPage';
 import Error404 from './components/Error404/Error404';
 import {FavoritesPage} from "./components/FavoritesPage/FavoritesPage";
 import {Header} from "./components/Header/Header";
+import {photoAPI} from "./api/api";
 
 // PATH
 export const FIND_IMAGE_PATH = "/find";
@@ -15,7 +16,7 @@ export const FAVORITES_PATH = "/favorites";
 
 
 const App=()=> {
-
+    photoAPI.getOnePhoto()
   return (
       <div className={style.app}>
         <div className={style.appHeader} >

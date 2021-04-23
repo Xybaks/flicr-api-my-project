@@ -1,8 +1,7 @@
 import React, {ChangeEvent, FC, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
-import {addTag, getPhotos, PhotoInStoreType} from "../../../state/photosReducer";
+import {addTag, PhotoInStoreType} from "../../../state/photosReducer";
 import {useDispatch} from "react-redux";
-import ProgressIndicator from "../../../common/components/ProgressIndicator";
 import {Tag} from "../../../common/components/Tag/Tag";
 
 
@@ -14,7 +13,7 @@ export const Photo: FC<PhotoPropsType> = (props) => {
 
     const dispatch = useDispatch()
     const [tagInput, setTagInput] = useState("")
-    const [error, setError] = useState<string | null>("Please, add tag")
+    const [error, setError] = useState<string | null>("")
 
 
     const inputTagHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,14 +34,7 @@ export const Photo: FC<PhotoPropsType> = (props) => {
             setError("Please, add tag")
         }
     }
-    // const deleteTag = (photoId:string,tag:string) => {
-    //     // try {
-    //     //     dispatch(deleteTag(photoId,tag))
-    //
-    //     // } catch  {
-    //     //     console.warn("Tag wasn't deleted")
-    //     // }
-    // }
+
             return (
         <div>
         <div style={{
@@ -52,11 +44,9 @@ export const Photo: FC<PhotoPropsType> = (props) => {
         }}>
         </div>
             <div>{title}</div>
-            {/*<div>{tags}</div>*/}
             <Tag
                 tags={tags}
                 photoId={id}
-                // deleteTag={deleteTag}
             />
             <IconButton onClick={ ()=>{
                 console.log("Add tag to memory")
@@ -65,13 +55,15 @@ export const Photo: FC<PhotoPropsType> = (props) => {
                 <TextField
                     type="text"
                     value={tagInput}
+                    label="new tag"
                     onChange={inputTagHandler}
                     onKeyPress={onKeyPressHandler}
                     variant="standard"
-                    placeholder={"Add tag here"}
+                    // placeholder={"Add tag here"}
                     error={!!error} // convert sting error to boolean
                     helperText={error}
                 />
+
 
         </div>
     )
