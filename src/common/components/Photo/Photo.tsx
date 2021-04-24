@@ -3,7 +3,7 @@ import {IconButton, TextField} from "@material-ui/core";
 import {addTag, PhotoInStoreType} from "../../../state/photosReducer";
 import {useDispatch} from "react-redux";
 import {Tag} from "../Tag/Tag";
-import {addPhotoToFavorite, removeFavoritePhoto} from "../../../state/favoriteReducer";
+import {addPhotoToFavorite, addTagToFavoriteTC, removeFavoritePhoto} from "../../../state/favoriteReducer";
 
 
 type PhotoPropsType = {
@@ -29,6 +29,9 @@ export const Photo: FC<PhotoPropsType> = (props) => {
     const addTagHandler = () => {
         if (tagInput.trim() !== "") {
             dispatch(addTag(id, tagInput))
+            if(props.isFavorite){
+                dispatch(addTagToFavoriteTC(id,tagInput))
+            }
             setTagInput("")
         } else {
             setError("Please, add tag")
@@ -55,6 +58,7 @@ export const Photo: FC<PhotoPropsType> = (props) => {
             <Tag
                 tags={tags}
                 photoId={id}
+                isFavorite={props.isFavorite}
             />
             <IconButton onClick={OnClickhandler}
             >{props.isFavorite ? "Remove  It" : "Bookmark  it!"}</IconButton>

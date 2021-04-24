@@ -2,6 +2,7 @@ import {photoAPI, PhotoType} from "../api/api";
 import {ActionsType, AppRootStateType, ThunkType} from "./reduxStore";
 import {ThunkDispatch} from "redux-thunk";
 
+
 // for actions names
 const SET_PHOTOS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS";
 const SET_PHOTOS_IS_GETTING_PROGRESS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS-IS-GETTING-PROGRESS";
@@ -9,6 +10,7 @@ const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
 const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
 const DELETE_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/DELETE-TAG";
 const SET_PAGE = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PAGE";
+
 
 
 export type PhotoInStoreType = {
@@ -121,6 +123,7 @@ export const addTag = (id: string, tag: string) => ({type: ADD_TAG, id, tag} as 
 export const deleteTag = (id: string, tag: string) => ({type: DELETE_TAG, id, tag} as const);
 export const setPage = (page: number) => ({type: SET_PAGE, page} as const);
 
+
 //ThunksCreators
 export const getPhotos = (text: string, page: number): ThunkType =>
     async (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
@@ -133,6 +136,7 @@ export const getPhotos = (text: string, page: number): ThunkType =>
         dispatch(setIsGettingPhotosProgress(false));
     }
 
+
 //ActionTypes
 type setPhotosActionType = ReturnType<typeof setPhotos>
 type setIsGettingPhotosProgressActionType = ReturnType<typeof setIsGettingPhotosProgress>
@@ -140,6 +144,7 @@ type setSearchNameActionType = ReturnType<typeof setSearchName>
 type addTagActionType = ReturnType<typeof addTag>
 type deleteTagActionType = ReturnType<typeof deleteTag>
 type setPageActionType = ReturnType<typeof setPage>
+
 
 
 // common ActionsType of this reducer
