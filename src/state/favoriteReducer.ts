@@ -18,10 +18,25 @@ export type InitialStateFavoriteReducerType = {
     favorite: Array<FavoritePhotoType>
 }
 
-const initialState: InitialStateFavoriteReducerType = {
-    favorite: []
+
+// function to set initial state from localeStorage
+const getInfoFromLocalStorage = (): InitialStateFavoriteReducerType => {
+    let storageInitialState: InitialStateFavoriteReducerType = {favorite: []}
+    try {
+        let keys: Array<string> = Object.keys(localStorage)
+        let i = keys.length;
+        while (i--) {
+            let value = JSON.parse(localStorage.getItem(keys[i]) as string);
+            let k: string = keys[i]
+            storageInitialState.favorite.push({favoritePhotoId: k, favoritePhoto: value})
+        }
+    } catch {
+        console.log("The app can't get data from localeStorage")
+    }
+    return storageInitialState;
 }
 
+const initialState: InitialStateFavoriteReducerType = getInfoFromLocalStorage()
 
 export const favoriteReducer =
     (state = initialState, action: FavoriteReducerActionsType): InitialStateFavoriteReducerType => {
@@ -55,22 +70,33 @@ export const deletePhotoFromFavorite = (id: string) => (
 
 // ThunksCreators
 export const addPhotoToFavorite = (favoritePhotoId: string, favoritePhoto: PhotoInStoreType): ThunkType =>
-    async (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
+    (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
         dispatch(setPhotoToFavorite(favoritePhotoId, favoritePhoto));
         // if LocaleStorage was disabled
-try {
-    localStorage.setItem(favoritePhotoId, JSON.stringify(favoritePhoto))
-}catch {
-    console.log( "image can't be added to LocaleStorage")
-}
+        try {
+            localStorage.setItem(favoritePhotoId, JSON.stringify(favoritePhoto))
+        } catch {
+            console.log("image can't be added to LocaleStorage")
+        }
+    }
+
+export const removeFavoritePhoto = (favoritePhotoId: string): ThunkType =>
+    (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
+        dispatch(deletePhotoFromFavorite(favoritePhotoId));
+        // if LocaleStorage was disabled
+        try {
+            localStorage.removeItem(favoritePhotoId)
+        } catch {
+            console.log("image can't be deleted from LocaleStorage")
+        }
     }
 
 //ActionTypes
 
 type SetPhotoToFavoriteActionType = ReturnType<typeof setPhotoToFavorite>
-type deletePhotoFromFavoriteActionType = ReturnType<typeof deletePhotoFromFavorite>
+type DeletePhotoFromFavoriteActionType = ReturnType<typeof deletePhotoFromFavorite>
 
 
 // common ActionsType of this reducer
 export type FavoriteReducerActionsType =
-    SetPhotoToFavoriteActionType | deletePhotoFromFavoriteActionType
+    SetPhotoToFavoriteActionType | DeletePhotoFromFavoriteActionType

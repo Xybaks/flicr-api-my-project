@@ -3,7 +3,7 @@ import {IconButton, TextField} from "@material-ui/core";
 import {addTag, PhotoInStoreType} from "../../../state/photosReducer";
 import {useDispatch} from "react-redux";
 import {Tag} from "../../../common/components/Tag/Tag";
-import {setPhotoToFavorite} from "../../../state/favoriteReducer";
+import {addPhotoToFavorite, removeFavoritePhoto, setPhotoToFavorite} from "../../../state/favoriteReducer";
 
 
 type PhotoPropsType = {
@@ -15,7 +15,6 @@ export const Photo: FC<PhotoPropsType> = (props) => {
     const dispatch = useDispatch()
     const [tagInput, setTagInput] = useState("")
     const [error, setError] = useState<string | null>("")
-
 
     const inputTagHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTagInput(e.currentTarget.value)
@@ -35,9 +34,10 @@ export const Photo: FC<PhotoPropsType> = (props) => {
             setError("Please, add tag")
         }
     }
-// УБРАТЬ  перед отправкой!!!
-//     try {dispatch(setPhotoToFavorite("19549873603",props.photo))}
-//     catch {}
+
+    const PhotoToFavoriteHandler =()=>{
+        dispatch(removeFavoritePhoto(id))
+    }
             return (
         <div>
         <div style={{
