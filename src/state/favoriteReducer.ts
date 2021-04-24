@@ -1,4 +1,3 @@
-import {photoAPI, PhotoType} from "../api/api";
 import {ActionsType, AppRootStateType, ThunkType} from "./reduxStore";
 import {ThunkDispatch} from "redux-thunk";
 import {PhotoInStoreType} from "./photosReducer";

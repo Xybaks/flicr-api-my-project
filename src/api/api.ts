@@ -6,9 +6,9 @@ const instance = axios.create({
 })
 
 export const photoAPI = {
-    getPhotos(text: string) {
+    getPhotos(text: string,page:number,pages:number=100) {
         return instance.get<GetPhotosResponseType>(
-            `?method=flickr.photos.search&format=json&nojsoncallback=true&api_key=${apiKey}&per_page=20&page=100&text=${text}`)
+            `?method=flickr.photos.search&format=json&nojsoncallback=true&sort=relevance&api_key=${apiKey}&page=${page}&pages=${pages}&per_page=20&&text=${text}`)
             .then((r) => {
                 console.log(r.data)
                 return r.data

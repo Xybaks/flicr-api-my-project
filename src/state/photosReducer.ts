@@ -8,6 +8,7 @@ const SET_PHOTOS_IS_GETTING_PROGRESS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-
 const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
 const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
 const DELETE_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/DELETE-TAG";
+const SET_PAGE = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PAGE";
 
 
 export type PhotoInStoreType = {
@@ -32,12 +33,12 @@ export type InitialStatePhotosReducerType = {
     photo: Array<PhotoInStoreType>,
     isGettingPhotosSuccess: boolean,
     isGettingPhotosProgress: boolean, // true, if loading of photos is in progress
-    gettingPhotosError: string
+    gettingPhotosError: string // is not used
 }
 
 const initialState: InitialStatePhotosReducerType = {
     searchName: "",
-    page: 0,
+    page: 1,
     pages: 0,
     perpage: 0,
     total: "",
@@ -54,16 +55,19 @@ export const photosReducer =
             case SET_PHOTOS:
                 return {
                     ...state,
+                    page: action.page,
+                    pages: action.pages,
                     photo: action.photos.map(p => ({...p, tags: []})),
                     isGettingPhotosSuccess: action.photos.length !== 0
                 }
+
             case SET_PHOTOS_IS_GETTING_PROGRESS:
                 return {...state, isGettingPhotosProgress: action.isGettingPhotosProgress}
+
             case SET_SEARCH_NAME:
                 return {...state, searchName: action.searchName}
+
             case ADD_TAG:
-
-
                 return {
                     ...state,
                     photo: state.photo.map(
@@ -72,30 +76,35 @@ export const photosReducer =
                                 ?
                                 {
                                     ...p,
-                                    tags:[...p.tags, action.tag]
+                                    tags: [...p.tags, action.tag]
                                 }
                                 : p)
                     )
                 }
+
             case DELETE_TAG:
                 return {
                     ...state,
                     photo: state.photo.map(
                         p => {
                             if (p.id === action.id) {
-                                let tagIndex=p.tags.indexOf(action.tag,0) // to find index of tag
-                                let newtags=[...p.tags] // copy for splice
-                                if (tagIndex>-1)    // no possibility to use 2 several same tags
+                                let tagIndex = p.tags.indexOf(action.tag, 0) // to find index of tag
+                                let newtags = [...p.tags] // copy for splice
+                                if (tagIndex > -1)    // no possibility to use 2 several same tags
                                     newtags.splice(tagIndex, 1)
                                 return {
                                     ...p
                                     ,
-                                    tags:newtags
+                                    tags: newtags
                                 }
                             } else return p
                         }
                     )
                 }
+            case SET_PAGE:
+                return {
+                    ...state,
+                    page: action.page}
 
             default:
                 return state
@@ -103,32 +112,37 @@ export const photosReducer =
     }
 //ActionCreators
 
-export const setPhotos = (photos: Array<PhotoType>) => ({type: SET_PHOTOS, photos} as const);
+export const setPhotos = (photos: Array<PhotoType>, page: number, pages: number) => (
+    {type: SET_PHOTOS, photos, page, pages} as const);
 export const setIsGettingPhotosProgress = (isGettingPhotosProgress: boolean) =>
     ({type: SET_PHOTOS_IS_GETTING_PROGRESS, isGettingPhotosProgress} as const);
 export const setSearchName = (searchName: string) => ({type: SET_SEARCH_NAME, searchName} as const);
 export const addTag = (id: string, tag: string) => ({type: ADD_TAG, id, tag} as const);
 export const deleteTag = (id: string, tag: string) => ({type: DELETE_TAG, id, tag} as const);
+export const setPage = (page: number) => ({type: SET_PAGE, page} as const);
 
 //ThunksCreators
-export const getPhotos = (text: string): ThunkType =>
+export const getPhotos = (text: string, page: number): ThunkType =>
     async (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
         dispatch(setIsGettingPhotosProgress(true));
-        const data = await photoAPI.getPhotos(text);
+        dispatch(setPage(page));
+         const data = await photoAPI.getPhotos(text, page);
         if (data.stat === "ok") {
-            dispatch(setPhotos(data.photos.photo))
+            dispatch(setPhotos(data.photos.photo, data.photos.page, data.photos.pages))
         }
         dispatch(setIsGettingPhotosProgress(false));
     }
+
 //ActionTypes
 type setPhotosActionType = ReturnType<typeof setPhotos>
 type setIsGettingPhotosProgressActionType = ReturnType<typeof setIsGettingPhotosProgress>
 type setSearchNameActionType = ReturnType<typeof setSearchName>
 type addTagActionType = ReturnType<typeof addTag>
 type deleteTagActionType = ReturnType<typeof deleteTag>
+type setPageActionType = ReturnType<typeof setPage>
 
 
 // common ActionsType of this reducer
 export type PhotosReducerActionsType =
     setPhotosActionType | setIsGettingPhotosProgressActionType | setSearchNameActionType | addTagActionType
-    | deleteTagActionType
+    | deleteTagActionType | setPageActionType
