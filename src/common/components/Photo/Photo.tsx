@@ -38,10 +38,10 @@ export const Photo: FC<PhotoPropsType> = (props) => {
         }
     }
 
-    const OnClickhandler = () => {
-        if (props.isFavorite) {
+    const OnClickHandler = () => {
+        if (props.isFavorite===true) {
             dispatch(removeFavoritePhoto(id))
-        } else {
+        } else if (props.isFavorite===false){
             dispatch(addPhotoToFavorite(id, props.photo))
         }
     }
@@ -60,7 +60,7 @@ export const Photo: FC<PhotoPropsType> = (props) => {
                 photoId={id}
                 isFavorite={props.isFavorite}
             />
-            <IconButton onClick={OnClickhandler}
+            <IconButton onClick={OnClickHandler}
             >{props.isFavorite ? "Remove  It" : "Bookmark  it!"}</IconButton>
             <TextField
                 type="text"

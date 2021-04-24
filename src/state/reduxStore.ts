@@ -6,10 +6,6 @@ import {favoriteReducer, FavoriteReducerActionsType} from "./favoriteReducer";
 const rootReducer = combineReducers({
     photos: photosReducer,
     favorite:favoriteReducer
-    // login: loginReducer,
-    // register: registerReducer,
-    // recover: recoverReducer,
-    // profile: profileReducer
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

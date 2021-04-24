@@ -60,10 +60,15 @@ export const favoriteReducer =
                 return {
                     ...state,
                     favorite: state.favorite.map(favPhoto => (favPhoto.favoritePhotoId !== action.id)
-                        ? favPhoto
+                        ? favPhoto //if photo is not favorite
                         : {
                             ...favPhoto, favoritePhoto:
-                                {...favPhoto.favoritePhoto, tags: [...favPhoto.favoritePhoto.tags, action.tag]}
+                                {
+                                    ...favPhoto.favoritePhoto, tags:
+                                        (favPhoto.favoritePhoto.tags.includes(action.tag)) // don't add 2 several tags
+                                            ? [...favPhoto.favoritePhoto.tags]
+                                            : [...favPhoto.favoritePhoto.tags, action.tag]
+                                }
                         }
                     )
                 }
@@ -77,7 +82,7 @@ export const favoriteReducer =
                             ...favPhoto, favoritePhoto:
                                 {
                                     ...favPhoto.favoritePhoto,
-                                    tags: [...favPhoto.favoritePhoto.tags.filter(t => t !== action.tag ? 1 : -1)]
+                                    tags: [...favPhoto.favoritePhoto.tags.filter(t => t !== action.tag)]
                                 }
                         }
                     )
@@ -128,6 +133,7 @@ export const addTagToFavoriteTC = (id: string, tag: string): ThunkType =>
         } catch {
             console.log("tag can't be added to LocaleStorageTS")
         }
+
     }
 
 export const deleteTagFromFavoriteTC = (id: string, tag: string): ThunkType =>

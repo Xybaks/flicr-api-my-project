@@ -6,12 +6,14 @@ import {IconButton, TextField} from "@material-ui/core";
 import {getPhotos, InitialStatePhotosReducerType} from "../../state/photosReducer";
 import ProgressIndicator from "../../common/components/ProgressIndicator/ProgressIndicator";
 import {MyPaginator} from "../MyPaginator/MyPaginator";
-import {isPhotoFavorite} from "../../common/functions/isPhotoFavorite";
+import { InitialStateFavoriteReducerType} from "../../state/favoriteReducer";
+
 
 
 export const FindPage = () => {
-// I need all state for FindPage rerender after user set/delete favorite photos
+
     const photoPage = useSelector<AppRootStateType, InitialStatePhotosReducerType>(state => state.photos)
+    const favoritePhotosPage=useSelector<AppRootStateType, InitialStateFavoriteReducerType>(state => state.favorite)
     const dispatch = useDispatch()
     const [title, setTitle] = useState<string>("")
     const [error, setError] = useState<string | null>("")
@@ -20,7 +22,6 @@ export const FindPage = () => {
         setTitle(e.currentTarget.value)
         setError(null)
     }
-
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (error !== null) setError(null)
         if (e.key === "Enter") findPhotoHandler()
@@ -41,7 +42,14 @@ export const FindPage = () => {
     if (photoPage.isGettingPhotosProgress) {
         return <ProgressIndicator/>
     }
-
+     const isPhotoFavorite = (id: string) => {
+        try {
+            if (favoritePhotosPage)
+                return favoritePhotosPage.favorite.some(fP => fP.favoritePhotoId === id)
+        } catch {
+            return false
+        }
+    }
     return (
         <div>
             <TextField
