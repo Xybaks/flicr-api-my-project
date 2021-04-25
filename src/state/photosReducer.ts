@@ -10,6 +10,8 @@ const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
 const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
 const DELETE_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/DELETE-TAG";
 const SET_PAGE = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PAGE";
+const SET_NEW_NAME="FLICR-API-MY-Project/PHOTOS-REDUCER/SET_NEW_NAME"
+const SET_NEW_ERROR="FLICR-API-MY-Project/PHOTOS-REDUCER/SET_NEW_ERROR"
 
 
 export type PhotoInStoreType = {
@@ -36,7 +38,8 @@ const initialState = {
     photo: [] as Array<PhotoInStoreType>,
     isGettingPhotosSuccess: true,
     isGettingPhotosProgress: false,
-    gettingPhotosError: ""
+    newName:"",
+    someError: ""
 }
 
 
@@ -97,6 +100,16 @@ export const photosReducer =
                     ...state,
                     page: action.page
                 }
+            case SET_NEW_NAME:
+                return {
+                    ...state,
+                    newName: action.name
+                }
+            case SET_NEW_ERROR:
+                return {
+                    ...state,
+                    someError: action.err
+                }
 
             default:
                 return state
@@ -112,6 +125,8 @@ export const setSearchName = (searchName: string) => ({type: SET_SEARCH_NAME, se
 export const addTag = (id: string, tag: string) => ({type: ADD_TAG, id, tag} as const);
 export const deleteTag = (id: string, tag: string) => ({type: DELETE_TAG, id, tag} as const);
 export const setPage = (page: number) => ({type: SET_PAGE, page} as const);
+export const setNewName = (name: string) => ({type: SET_NEW_NAME, name} as const);
+export const setNewError = (err: string) => ({type: SET_NEW_ERROR, err} as const);
 
 
 //ThunksCreators
@@ -123,11 +138,11 @@ export const getPhotos = (text: string, page: number): ThunkType =>
             const data = await photoAPI.getPhotos(text, page);
             if (data.stat === "ok") {
                 dispatch(setPhotos(data.photos.photo, data.photos.page, data.photos.pages))
+                dispatch(setNewError(""))
             }
         } catch {
-            console.log("getPhotos", "Error")
-            dispatch(setIsGettingPhotosProgress(false))
-        }
+            dispatch(setNewError("no connection"))
+         }
         dispatch(setIsGettingPhotosProgress(false));
     }
 
@@ -139,9 +154,11 @@ type setSearchNameActionType = ReturnType<typeof setSearchName>
 type addTagActionType = ReturnType<typeof addTag>
 type deleteTagActionType = ReturnType<typeof deleteTag>
 type setPageActionType = ReturnType<typeof setPage>
+type setNewNameActionType = ReturnType<typeof setNewName>
+type setNewErrorActionType = ReturnType<typeof setNewError>
 
 
 // common ActionsType of this reducer
 export type PhotosReducerActionsType =
     setPhotosActionType | setIsGettingPhotosProgressActionType | setSearchNameActionType | addTagActionType
-    | deleteTagActionType | setPageActionType
+    | deleteTagActionType | setPageActionType | setNewNameActionType | setNewErrorActionType

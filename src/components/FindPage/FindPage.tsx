@@ -1,34 +1,38 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../state/reduxStore";
 import {Photo} from "../../common/components/Photo/Photo";
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
-import {getPhotos} from "../../state/photosReducer";
+import {getPhotos, setNewName} from "../../state/photosReducer";
 import ProgressIndicator from "../../common/components/ProgressIndicator/ProgressIndicator";
 import {MyPaginator} from "../MyPaginator/MyPaginator";
-
 
 
 export const FindPage = () => {
     const state = useSelector<AppRootStateType, AppRootStateType>(state => state)
     const photoPage = state.photos
     const favoritePhotosPage = state.favorite
-       const dispatch = useDispatch()
-    const [title, setTitle] = useState<string>("")
-    const [error, setError] = useState<string | null>("")
+    const dispatch = useDispatch()
+    const [title, setTitle] = useState<string>(photoPage.newName)
+    const [error, setError] = useState<string>(state.photos.someError)
+
+    useEffect(()=>{
+        setError(state.photos.someError)
+    },[state.photos.someError])
 
     const inputNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-        setError(null)
+        setError("")
     }
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (error !== null) setError(null)
+        if (error !== "") setError("")
         if (e.key === "Enter") findPhotoHandler()
     }
 
     const findPhotoHandler = () => {
         if (title.trim() !== "") {
             dispatch(getPhotos(title, photoPage.page))
+            dispatch(setNewName(title))
         } else {
             setError("Please, add name to find image")
         }
@@ -42,12 +46,7 @@ export const FindPage = () => {
         return <ProgressIndicator/>
     }
     const isPhotoFavorite = (id: string) => {
-        try {
-            if (favoritePhotosPage)
-                return favoritePhotosPage.favorite.some(fP => fP.favoritePhotoId === id)
-        } catch {
-            return false
-        }
+                return favoritePhotosPage?.favorite.some(fP => fP.favoritePhotoId === id)
     }
     return (
         <div>
@@ -58,7 +57,7 @@ export const FindPage = () => {
                 onKeyPress={onKeyPressHandler}
                 variant="outlined"
                 placeholder={"Print your search"}
-                error={!!error} // convert sting error to boolean
+                error={error !== ""} // convert sting error to boolean
                 helperText={error}
             />
 
@@ -68,7 +67,8 @@ export const FindPage = () => {
 
             <MyPaginator
                 currentPage={photoPage.page}
-                pagesCount={photoPage.pages}
+                /*4000 photos is max for not registered users*/
+                pagesCount={photoPage.pages > 200 ? 200 : photoPage.pages}
                 onPageChanged={onPageChanged}/>
 
             {photoPage.photo.map(ph => <Photo

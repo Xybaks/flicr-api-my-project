@@ -21,7 +21,6 @@ export const photoAPI = {
                 }
             })
             .then((r) => {
-                    console.log(r.data)
                     return r.data
                 }
             )
@@ -33,9 +32,6 @@ export const photoAPI = {
                     return r.data
                 }
             )
-            .catch((e)=>{
-                console.log(e)
-            })
     }
 }
 

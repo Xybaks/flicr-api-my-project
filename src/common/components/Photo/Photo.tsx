@@ -29,8 +29,8 @@ export const Photo: FC<PhotoPropsType> = (props) => {
     const addTagHandler = () => {
         if (tagInput.trim() !== "") {
             dispatch(addTag(id, tagInput))
-            if(props.isFavorite){
-                dispatch(addTagToFavoriteTC(id,tagInput))
+            if (props.isFavorite) {
+                dispatch(addTagToFavoriteTC(id, tagInput))
             }
             setTagInput("")
         } else {
@@ -39,16 +39,16 @@ export const Photo: FC<PhotoPropsType> = (props) => {
     }
 
     const OnClickHandler = () => {
-        if (props.isFavorite===true) {
+        if (props.isFavorite) {
             dispatch(removeFavoritePhoto(id))
-        } else if (props.isFavorite===false){
+        } else {
             dispatch(addPhotoToFavorite(id, props.photo))
         }
     }
- const imgSrc=`https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
+    const imgSrc = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
     return (
         <div>
-            <img className={styles.photoImage} src={imgSrc} alt="img is loading :)" />
+            <img className={styles.photoImage} src={imgSrc} alt="img is loading :)"/>
             <div>{title}</div>
             <Tag
                 tags={tags}

@@ -138,7 +138,6 @@ export const addTagToFavoriteTC = (id: string, tag: string): ThunkType =>
 
 export const deleteTagFromFavoriteTC = (id: string, tag: string): ThunkType =>
     (dispatch) => {
-        console.log("dddds")
         dispatch(deleteTagFromFavorite(id, tag));
         try {
             let favoritePhoto: PhotoInStoreType = JSON.parse(localStorage.getItem(id) as string)
