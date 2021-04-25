@@ -3,18 +3,17 @@ import {AppRootStateType} from "../../state/reduxStore";
 import {Photo} from "../../common/components/Photo/Photo";
 import React, {ChangeEvent, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
-import {getPhotos, InitialStatePhotosReducerType} from "../../state/photosReducer";
+import {getPhotos} from "../../state/photosReducer";
 import ProgressIndicator from "../../common/components/ProgressIndicator/ProgressIndicator";
 import {MyPaginator} from "../MyPaginator/MyPaginator";
-import { InitialStateFavoriteReducerType} from "../../state/favoriteReducer";
 
 
 
 export const FindPage = () => {
-
-    const photoPage = useSelector<AppRootStateType, InitialStatePhotosReducerType>(state => state.photos)
-    const favoritePhotosPage=useSelector<AppRootStateType, InitialStateFavoriteReducerType>(state => state.favorite)
-    const dispatch = useDispatch()
+    const state = useSelector<AppRootStateType, AppRootStateType>(state => state)
+    const photoPage = state.photos
+    const favoritePhotosPage = state.favorite
+       const dispatch = useDispatch()
     const [title, setTitle] = useState<string>("")
     const [error, setError] = useState<string | null>("")
 
@@ -42,7 +41,7 @@ export const FindPage = () => {
     if (photoPage.isGettingPhotosProgress) {
         return <ProgressIndicator/>
     }
-     const isPhotoFavorite = (id: string) => {
+    const isPhotoFavorite = (id: string) => {
         try {
             if (favoritePhotosPage)
                 return favoritePhotosPage.favorite.some(fP => fP.favoritePhotoId === id)

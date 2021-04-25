@@ -1,3 +1,14 @@
-.navBlock:not(:first-child):not(:last-child) {
-    margin: 10px;
+.navBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 3px solid black;
+  border-inline-start: none ;
+  padding: 10px;
+}
+
+.link {
+  &:hover {
+    transform: scale(1.1);
+  }
 }

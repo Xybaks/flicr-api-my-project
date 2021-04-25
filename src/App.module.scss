@@ -1,22 +1,24 @@
 .app {
-  background-color: #282c34;
-  min-height: 100vh;
-  min-width: 100vh;
+  background: #243238;
+  //min-height: 100vh;
+  //min-width: 100vh;
   display: flex;
+  flex-direction:column;
   justify-content: center;
 }
 
 
 .appHeader {
-  min-width: 80vh;
-  flex-direction: row;
+  width: 100%;
   align-items: center;
   justify-content: center;
   background-color: greenyellow;
   font-size: calc(10px + 2vmin);
   color: white;
+
 }
 
 .table{
   display: flex;
+  background-color: aquamarine;
 }

@@ -1,6 +1,6 @@
 import {photoAPI, PhotoType} from "../api/api";
-import {ActionsType, AppRootStateType, ThunkType} from "./reduxStore";
-import {ThunkDispatch} from "redux-thunk";
+import {ThunkType} from "./reduxStore";
+
 
 
 // for actions names
@@ -10,7 +10,6 @@ const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
 const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
 const DELETE_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/DELETE-TAG";
 const SET_PAGE = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PAGE";
-
 
 
 export type PhotoInStoreType = {
@@ -26,25 +25,15 @@ export type PhotoInStoreType = {
     tags: Array<string>
 }
 
-export type InitialStatePhotosReducerType = {
-    searchName: string,
-    page: number,
-    pages: number,
-    perpage: number,
-    total: string,
-    photo: Array<PhotoInStoreType>,
-    isGettingPhotosSuccess: boolean,
-    isGettingPhotosProgress: boolean, // true, if loading of photos is in progress
-    gettingPhotosError: string // is not used
-}
+export type InitialStatePhotosReducerType = typeof initialState
 
-const initialState: InitialStatePhotosReducerType = {
+const initialState = {
     searchName: "",
     page: 1,
     pages: 0,
     perpage: 0,
     total: "",
-    photo: [],
+    photo: [] as Array<PhotoInStoreType>,
     isGettingPhotosSuccess: true,
     isGettingPhotosProgress: false,
     gettingPhotosError: ""
@@ -74,7 +63,7 @@ export const photosReducer =
                     ...state,
                     photo: state.photo.map(
                         p => (
-                            (p.id === action.id && !p.tags.includes(action.tag)) // check for  adding duplicate tag
+                            (p.id === action.id && !p.tags.includes(action.tag)) // check for duplicate tag
                                 ?
                                 {
                                     ...p,
@@ -90,7 +79,7 @@ export const photosReducer =
                     photo: state.photo.map(
                         p => {
                             if (p.id === action.id) {
-                                let tagIndex = p.tags.indexOf(action.tag, 0) // to find index of tag
+                                let tagIndex = p.tags.indexOf(action.tag) // to find index of tag
                                 let newtags = [...p.tags] // copy for splice
                                 if (tagIndex > -1)    // no possibility to use 2 several same tags
                                     newtags.splice(tagIndex, 1)
@@ -106,7 +95,8 @@ export const photosReducer =
             case SET_PAGE:
                 return {
                     ...state,
-                    page: action.page}
+                    page: action.page
+                }
 
             default:
                 return state
@@ -126,12 +116,17 @@ export const setPage = (page: number) => ({type: SET_PAGE, page} as const);
 
 //ThunksCreators
 export const getPhotos = (text: string, page: number): ThunkType =>
-    async (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsType>) => {
+    async (dispatch) => {
         dispatch(setIsGettingPhotosProgress(true));
         dispatch(setPage(page));
-         const data = await photoAPI.getPhotos(text, page);
-        if (data.stat === "ok") {
-            dispatch(setPhotos(data.photos.photo, data.photos.page, data.photos.pages))
+        try {
+            const data = await photoAPI.getPhotos(text, page);
+            if (data.stat === "ok") {
+                dispatch(setPhotos(data.photos.photo, data.photos.page, data.photos.pages))
+            }
+        } catch {
+            console.log("getPhotos", "Error")
+            dispatch(setIsGettingPhotosProgress(false))
         }
         dispatch(setIsGettingPhotosProgress(false));
     }
@@ -144,7 +139,6 @@ type setSearchNameActionType = ReturnType<typeof setSearchName>
 type addTagActionType = ReturnType<typeof addTag>
 type deleteTagActionType = ReturnType<typeof deleteTag>
 type setPageActionType = ReturnType<typeof setPage>
-
 
 
 // common ActionsType of this reducer

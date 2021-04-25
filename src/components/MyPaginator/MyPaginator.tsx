@@ -13,10 +13,10 @@ export const MyPaginator:React.FC<MyPaginatorPropsType> = (props) => {
 
     const onPageChangedHandler = (event: React.ChangeEvent<unknown>, value: number) => {
         onPageChanged(value)
-        console.log(value)
     }
 
     return <>
+
         {pagesCount === 0 ?
             <></>
             : < Pagination count={pagesCount} page={currentPage}

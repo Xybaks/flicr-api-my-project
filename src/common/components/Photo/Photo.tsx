@@ -48,13 +48,6 @@ export const Photo: FC<PhotoPropsType> = (props) => {
  const imgSrc=`https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
     return (
         <div>
-            {/*<div className={styles.photoImage} style={{*/}
-            {/*    width: "330px",*/}
-            {/*    height: "200px",*/}
-            {/*    backgroundImage: `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`*/}
-            {/*}}>*/}
-            {/*</div>*/}
-
             <img className={styles.photoImage} src={imgSrc} alt="img is loading :)" />
             <div>{title}</div>
             <Tag
