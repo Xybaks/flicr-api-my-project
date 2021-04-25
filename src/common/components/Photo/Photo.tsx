@@ -4,7 +4,7 @@ import {addTag, PhotoInStoreType} from "../../../state/photosReducer";
 import {useDispatch} from "react-redux";
 import {Tag} from "../Tag/Tag";
 import {addPhotoToFavorite, addTagToFavoriteTC, removeFavoritePhoto} from "../../../state/favoriteReducer";
-
+import styles from "./Photo.module.scss"
 
 type PhotoPropsType = {
     photo: PhotoInStoreType
@@ -45,15 +45,17 @@ export const Photo: FC<PhotoPropsType> = (props) => {
             dispatch(addPhotoToFavorite(id, props.photo))
         }
     }
-
+ const imgSrc=`https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
     return (
         <div>
-            <div style={{
-                width: "330px",
-                height: "200px",
-                backgroundImage: `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
-            }}>
-            </div>
+            {/*<div className={styles.photoImage} style={{*/}
+            {/*    width: "330px",*/}
+            {/*    height: "200px",*/}
+            {/*    backgroundImage: `url(https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`*/}
+            {/*}}>*/}
+            {/*</div>*/}
+
+            <img className={styles.photoImage} src={imgSrc} alt="img is loading :)" />
             <div>{title}</div>
             <Tag
                 tags={tags}

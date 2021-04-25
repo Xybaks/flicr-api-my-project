@@ -18,7 +18,7 @@ export const Tag: React.FC<TagPropsType> =(props)=>{
 
     const deleteTagHandler=(tag:string)=>()=>{
             dispatch(deleteTag(photoId, tag))
-        if (props.isFavorite===false){
+        if (props.isFavorite){
             deleteTagFromFavoriteTC(photoId, tag)
         }
     }
