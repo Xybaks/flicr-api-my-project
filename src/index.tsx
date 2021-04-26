@@ -9,7 +9,7 @@ import {Provider} from 'react-redux';
 
 ReactDOM.render(
     <React.StrictMode>
-        {/*<HashRouter> more stable in gh-pages*/}
+        {/*<HashRouter> is more stable in gh-pages*/}
         <HashRouter>
             <Provider store={store}>
                 <App/>

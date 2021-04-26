@@ -19,13 +19,13 @@ export const photoAPI = {
                     nojsoncallback: true,
                     sort: "relevance"
                 }
-            })
+            }
+        )
             .then((r) => {
-                    return r.data
-                }
-            )
+                return r.data
+            })
     },
-    //the request is not used yet
+    //this request is not used yet
     getOnePhoto(id: string = "19549873603") {
         return instance.get<GetOnePhotoResponseType>(`?method=flickr.photos.getInfo&api_key=${apiKey}&photo_id=${id}&format=json&nojsoncallback=true`)
             .then((r) => {

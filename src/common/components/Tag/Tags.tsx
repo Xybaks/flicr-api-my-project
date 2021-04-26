@@ -4,6 +4,7 @@ import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";
 import {deleteTag} from "../../../state/photosReducer";
 import {deleteTagFromFavoriteTC} from "../../../state/favoriteReducer";
+import styles from "./Tags.module.scss"
 
 type TagPropsType = {
     photoId: string
@@ -12,7 +13,7 @@ type TagPropsType = {
 }
 
 
-export const Tag: React.FC<TagPropsType> = (props) => {
+export const Tags: React.FC<TagPropsType> = (props) => {
     const {tags, photoId} = props
     const dispatch = useDispatch()
 
@@ -23,12 +24,14 @@ export const Tag: React.FC<TagPropsType> = (props) => {
         }
     }
     return (
-        <div>{tags.map((t, index) => (
-            <div key={t + index}>
-                <span> {t}</span>
-                <IconButton size="small" onClick={deleteTagHandler(t)}><Delete color="primary"/></IconButton>
-            </div>
-        ))}</div>
+        <div className={styles.tags}>
+            {tags.map((t, index) => (
+                <div className={styles.singleTag}
+                     key={t + index}>
+                    <span> {t}</span>
+                    <IconButton size="small" onClick={deleteTagHandler(t)}><Delete color="primary"/></IconButton>
+                </div>
+            ))}</div>
     )
 
 }

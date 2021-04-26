@@ -1,5 +1,22 @@
-.photoImage{
-  width: 300px;
-  object-fit: cover;
+@import "./src/common/styles/sass/variables";
 
+.photoContainer{
+  width: 270px ;
+  padding: 10px;
+  margin: 20px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $backgroundColor3;
+  .photoImage{
+    max-width: 240px;
+    object-fit: cover;
+    }
+  .searchZone{
+    color: $mainColor;
+  }
+  .button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }

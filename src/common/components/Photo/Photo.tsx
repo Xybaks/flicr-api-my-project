@@ -1,8 +1,8 @@
 import React, {ChangeEvent, FC, useState} from "react";
-import {IconButton, TextField} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import {addTag, PhotoInStoreType} from "../../../state/photosReducer";
 import {useDispatch} from "react-redux";
-import {Tag} from "../Tag/Tag";
+import {Tags} from "../Tag/Tags";
 import {addPhotoToFavorite, addTagToFavoriteTC, removeFavoritePhoto} from "../../../state/favoriteReducer";
 import styles from "./Photo.module.scss"
 
@@ -11,18 +11,22 @@ type PhotoPropsType = {
     isFavorite?: boolean
 }
 export const Photo: FC<PhotoPropsType> = (props) => {
-    const {farm, tags, id, secret, server, title} = props.photo
+    const {farm, tags, id, secret, server} = props.photo
     const dispatch = useDispatch()
     const [tagInput, setTagInput] = useState("")
-    const [error, setError] = useState<string | null>("")
+    const [error, setError] = useState<string>("")
 
     const inputTagHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTagInput(e.currentTarget.value)
-        setError(null)
+        if (e.currentTarget.value.length < 16) {
+            setTagInput(e.currentTarget.value)
+            setError("")
+        } else {
+            setError("long tag")
+        }
     }
 
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (error !== null) setError(null)
+        if (error !== "") setError("")
         if (e.key === "Enter") addTagHandler()
     }
 
@@ -45,27 +49,34 @@ export const Photo: FC<PhotoPropsType> = (props) => {
             dispatch(addPhotoToFavorite(id, props.photo))
         }
     }
+
     const imgSrc = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
+
     return (
-        <div>
+        <div className={styles.photoContainer}>
             <img className={styles.photoImage} src={imgSrc} alt="img is loading :)"/>
-            <div>{title}</div>
-            <Tag
+            <div className={styles.button}>
+                <Button
+                    onClick={OnClickHandler}
+                    variant="outlined"
+                    color="primary"
+                >
+                    {props.isFavorite ? "Remove  It!" : "Bookmark  it!"}</Button>
+            </div>
+            <Tags
                 tags={tags}
                 photoId={id}
                 isFavorite={props.isFavorite}
             />
-            <IconButton onClick={OnClickHandler}
-            >{props.isFavorite ? "Remove  It" : "Bookmark  it!"}</IconButton>
-            <TextField
-                type="text"
-                value={tagInput}
-                label="new tag"
-                onChange={inputTagHandler}
-                onKeyPress={onKeyPressHandler}
-                variant="standard"
-                error={!!error}
-                helperText={error}
+            <TextField className={styles.button}
+                       type="text"
+                       value={tagInput}
+                       label="some tags?"
+                       onChange={inputTagHandler}
+                       onKeyPress={onKeyPressHandler}
+                       variant="outlined"
+                       error={!!error}
+                       helperText={error}
             />
         </div>
     )

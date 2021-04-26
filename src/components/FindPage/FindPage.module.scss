@@ -1,0 +1,21 @@
+
+
+.findPageContainer{
+  display: flex;
+  flex-direction: column ;
+  width: 100%;
+  min-height: 100vh;
+  margin:10px;
+    .input{
+      min-width:70%;
+      max-width:90%;
+      margin-bottom: 10px;
+    }
+  .photos{
+    display: flex;
+    flex-direction: row ;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+}

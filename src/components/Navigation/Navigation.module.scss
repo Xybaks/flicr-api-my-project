@@ -1,14 +1,13 @@
-.navBlock{
+@import "./src/common/styles/sass/variables";
+
+.navBlock {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   border: 3px solid black;
-  border-inline-start: none ;
+  border-inline-start: none;
   padding: 10px;
+  background-color: $backgroundColor3;
+  min-height: 100vh;
 }
 
-.link {
-  &:hover {
-    transform: scale(1.1);
-  }
-}

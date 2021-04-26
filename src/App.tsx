@@ -5,6 +5,7 @@ import {FindPage} from './components/FindPage/FindPage';
 import Error404 from './components/Error404/Error404';
 import {FavoritesPage} from "./components/FavoritesPage/FavoritesPage";
 import {Header} from "./components/Header/Header";
+import {Footer} from "./components/Footer/Footer";
 
 
 // PATH
@@ -27,6 +28,7 @@ const App = () => {
                         <Route render={() => <Error404/>}/>
                     </Switch>
                 </div>
+                <Footer/>
             </div>
          </div>
     );
