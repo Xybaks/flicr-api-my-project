@@ -26,9 +26,9 @@ const App = () => {
                     <div className={style.appHeader}>
                         <div className={style.table}>
                             <Navigation/>
+                            <Route exact path={'/favor'} render={() => <FavoritesPage/>}/>
+                            <Route  exact path={'/find'} render={() => <FindPage/>}/>
                             <Route exact path={"/"} render={() => <FindPage/>}/>
-                            <Route path={'/favor'} render={() => <FavoritesPage/>}/>
-                            <Route path={'/find'} render={() => <FindPage/>}/>
                             {/*<Switch>*/}
                             {/*    <Route exact path={"/"} render={() => <FindPage/>}/>*/}
                             {/*    <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>*/}
