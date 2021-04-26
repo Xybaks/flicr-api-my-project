@@ -10,11 +10,9 @@ import {Provider} from "react-redux";
 import {store} from "./state/reduxStore";
 import React from "react";
 
-
 // PATH
-export const FIND_IMAGE_PATH = '/find';
-export const FAVORITES_PATH = '/favor';
-
+export const FIND_IMAGE_PATH = '/';
+export const FAVORITES_PATH = '/favorite';
 
 const App = () => {
 
@@ -28,18 +26,9 @@ const App = () => {
                             <Navigation/>
                             <Switch>
                                 <Route exact path={"/"} render={() => <FindPage/>}/>
-                                <Route exact path={'/favor'}
-                                       render={() => <FavoritesPage/>}
-                                    // component={FavoritesPage}
-                                />
+                                <Route exact path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
                                 <Route render={() => <Error404/>}/>
                             </Switch>
-                            {/*<Switch>*/}
-                            {/*    <Route exact path={"/"} render={() => <FindPage/>}/>*/}
-                            {/*    <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>*/}
-                            {/*    <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>*/}
-                            {/*    <Route render={() => <Error404/>}/>*/}
-                            {/*</Switch>*/}
                         </div>
                         <Footer/>
                     </div>
@@ -48,6 +37,5 @@ const App = () => {
         </Provider>
     );
 }
-
 
 export default App;

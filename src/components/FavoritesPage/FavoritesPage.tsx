@@ -12,7 +12,14 @@ export const FavoritesPage = () => {
 
     return (
         <div className={styles.favoritePageContainer}>
+
             <div className={styles.photos}>
+                {favoritePhotosPage.favorite.length === 0
+                    ?
+                    <div> You don't have any favorite photos.</div>
+                    :
+                    <></>
+                }
                 {favoritePhotosPage.favorite.map(photo =>
                     <Photo key={photo.favoritePhotoId}
                            photo={photo.favoritePhoto}
@@ -22,5 +29,4 @@ export const FavoritesPage = () => {
             </div>
         </div>
     )
-
 }

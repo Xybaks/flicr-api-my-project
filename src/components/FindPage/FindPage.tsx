@@ -84,7 +84,6 @@ export default function FindPage() {
                     />
                 </Grid>
                 <Grid className={classes.item} item xs={4}>
-                    {/*<div  className={styles.button}>*/}
                     <Button
                         onClick={findPhotoHandler}
                         variant="outlined"
@@ -95,7 +94,9 @@ export default function FindPage() {
                 </Grid>
             </Grid>
         </div>
-        {!photos.isGettingPhotosSuccess && <div>No image here. Would you like to find anything else?</div>}
+
+            {!photos.isGettingPhotosSuccess && <div>No image here. Would you like to find anything else?</div>}
+
         <MyPaginator
             currentPage={photos.page}
             /*4000 photos is max for not registered users*/
