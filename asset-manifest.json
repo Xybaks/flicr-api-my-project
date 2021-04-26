@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/flicr-api-my-project/static/css/main.80426351.chunk.css",
-    "main.js": "/flicr-api-my-project/static/js/main.d3d851f5.chunk.js",
-    "main.js.map": "/flicr-api-my-project/static/js/main.d3d851f5.chunk.js.map",
+    "main.js": "/flicr-api-my-project/static/js/main.d74f74be.chunk.js",
+    "main.js.map": "/flicr-api-my-project/static/js/main.d74f74be.chunk.js.map",
     "runtime-main.js": "/flicr-api-my-project/static/js/runtime-main.2f9ecfaa.js",
     "runtime-main.js.map": "/flicr-api-my-project/static/js/runtime-main.2f9ecfaa.js.map",
     "static/js/2.b2bb7852.chunk.js": "/flicr-api-my-project/static/js/2.b2bb7852.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2f9ecfaa.js",
     "static/js/2.b2bb7852.chunk.js",
     "static/css/main.80426351.chunk.css",
-    "static/js/main.d3d851f5.chunk.js"
+    "static/js/main.d74f74be.chunk.js"
   ]
 }
