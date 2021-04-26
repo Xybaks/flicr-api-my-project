@@ -23,8 +23,8 @@ const App = () => {
                     <Navigation/>
                     <Switch>
                         <Route exact path={"/"} render={() => <FindPage/>}/>
-                        <Route exact path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
-                        <Route exact path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
+                        <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
+                        <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
                         <Route render={() => <Error404/>}/>
                     </Switch>
                 </div>
