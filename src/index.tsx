@@ -10,13 +10,13 @@ import {Provider} from 'react-redux';
 ReactDOM.render(
     <React.StrictMode>
         {/*<HashRouter> is more stable in gh-pages*/}
-        <HashRouter
-            basename='/my'
-        >
-            <Provider store={store}>
+        {/*<HashRouter*/}
+        {/*    basename='/my'*/}
+        {/*>*/}
+        {/*    <Provider store={store}>*/}
                 <App/>
-            </Provider>
-        </HashRouter>
+        {/*    </Provider>*/}
+        {/*</HashRouter>*/}
     </React.StrictMode>,
     document.getElementById('root')
 );
