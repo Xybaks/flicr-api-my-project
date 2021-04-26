@@ -51,7 +51,7 @@ export const Photo: FC<PhotoPropsType> = React.memo((props) => {
     }
 
     const imgSrc = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
-    console.log("new Photo was rendered")
+
     return (
         <div className={styles.photoContainer}>
             <img className={styles.photoImage} src={imgSrc} alt="img is loading :)"/>

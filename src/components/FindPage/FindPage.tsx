@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     item: {
         padding: theme.spacing(2),
+        xs: "12"
     },
     itemFlexGrow: {
         flexGrow: 1,
@@ -67,29 +68,31 @@ export default function FindPage() {
 
     return <div className={styles.findPageContainer}>
         <div className={classes.container1}>
-            <Grid xs={8}>
-                <TextField
-                    type="text"
-                    value={title}
-                    onChange={inputNameHandler}
-                    onKeyPress={onKeyPressHandler}
-                    variant="outlined"
-                    placeholder={"Print your search"}
-                    error={error !== ""} // convert sting error to boolean
-                    helperText={error}
-                    fullWidth={true}
-                    size={"medium"}
-                />
-            </Grid>
-            <Grid xs={2}>
-                <div className={styles.button}>
-                <Button
-                    onClick={findPhotoHandler}
-                    variant="outlined"
-                    color="primary"
-                    size="large"
-                >FIND</Button>
-                </div>
+            <Grid container>
+                <Grid className={classes.item} item xs={8}>
+                    <TextField
+                        type="text"
+                        value={title}
+                        onChange={inputNameHandler}
+                        onKeyPress={onKeyPressHandler}
+                        variant="outlined"
+                        placeholder={"Print your search"}
+                        error={error !== ""} // convert sting error to boolean
+                        helperText={error}
+                        fullWidth={true}
+                        size={"medium"}
+                    />
+                </Grid>
+                <Grid className={classes.item} item xs={4}>
+                    {/*<div  className={styles.button}>*/}
+                    <Button
+                        onClick={findPhotoHandler}
+                        variant="outlined"
+                        color="primary"
+                        size="large"
+                    >FIND</Button>
+                    {/*</div>*/}
+                </Grid>
             </Grid>
         </div>
         {!photos.isGettingPhotosSuccess && <div>No image here. Would you like to find anything else?</div>}

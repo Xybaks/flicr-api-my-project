@@ -3,11 +3,8 @@ import {
     deletePhotoFromFavorite, deleteTagFromFavorite,
     favoriteReducer,
     InitialStateFavoriteReducerType,
-    setPhotoToFavorite
 } from "./favoriteReducer";
-import {PhotoInStoreType} from "./photosReducer";
 import {ActionsType} from "./reduxStore";
-
 
 
 let startState: InitialStateFavoriteReducerType = {favorite: []}
@@ -48,30 +45,6 @@ beforeEach(() => {
     }
 )
 
-test('photo should be correct added', () => {
-    const favoritePhotoId = "13682192333"
-    const newPhoto: PhotoInStoreType = {
-        farm: 4,
-        id: "13682192333",
-        isfamily: 0,
-        isfriend: 0,
-        ispublic: 1,
-        owner: "Mixa",
-        secret: "882c1eecff",
-        server: "3718",
-        title: "CarS",
-        tags: ["112", "332", "5122", "25", "2344325", "1", "44"]
-    }
-
-    const action: ActionsType = setPhotoToFavorite(favoritePhotoId, newPhoto);
-    const endState = favoriteReducer(startState, action)
-
-    expect(endState.favorite.length).toBe(3);
-    expect(endState.favorite[2].favoritePhotoId).toBe("13682192333");
-    expect(endState.favorite[2].favoritePhoto.tags[1]).toBe("332");
-
-});
-
 
 test('photo should be correct deleted', () => {
     const id = "13682192405"
@@ -97,5 +70,5 @@ test('tag  should be correct deleted from photo', () => {
     const endState = favoriteReducer(startState, action)
     expect(endState.favorite.length).toBe(2);
     expect(endState.favorite[1].favoritePhoto.tags.length).toBe(6)
-    expect(endState.favorite[1].favoritePhoto.tags.some(element => element === "ljj")).toBeFalsy()
+    expect(endState.favorite[1].favoritePhoto.tags.some(element => element === tag)).toBeFalsy()
 });

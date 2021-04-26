@@ -2,7 +2,6 @@ import {photoAPI, PhotoType} from "../api/api";
 import {ThunkType} from "./reduxStore";
 
 
-
 // for actions names
 const SET_PHOTOS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS";
 const SET_PHOTOS_IS_GETTING_PROGRESS = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PHOTOS-IS-GETTING-PROGRESS";
@@ -10,8 +9,8 @@ const SET_SEARCH_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-SEARCH-NAME";
 const ADD_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/ADD-TAG";
 const DELETE_TAG = "FLICR-API-MY-Project/PHOTOS-REDUCER/DELETE-TAG";
 const SET_PAGE = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET-PAGE";
-const SET_NEW_NAME="FLICR-API-MY-Project/PHOTOS-REDUCER/SET_NEW_NAME"
-const SET_NEW_ERROR="FLICR-API-MY-Project/PHOTOS-REDUCER/SET_NEW_ERROR"
+const SET_NEW_NAME = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET_NEW_NAME"
+const SET_NEW_ERROR = "FLICR-API-MY-Project/PHOTOS-REDUCER/SET_NEW_ERROR"
 
 
 export type PhotoInStoreType = {
@@ -38,7 +37,7 @@ const initialState = {
     photo: [] as Array<PhotoInStoreType>,
     isGettingPhotosSuccess: true,
     isGettingPhotosProgress: false,
-    newName:"",
+    newName: "",
     someError: ""
 }
 
@@ -142,7 +141,7 @@ export const getPhotos = (text: string, page: number): ThunkType =>
             }
         } catch {
             dispatch(setNewError("no connection"))
-         }
+        }
         dispatch(setIsGettingPhotosProgress(false));
     }
 
