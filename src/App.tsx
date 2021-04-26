@@ -23,7 +23,7 @@ const App = () => {
                     <Navigation/>
                     <Switch>
                         <Route exact path={"/"} render={() => <FindPage/>}/>
-                        <Route path={process.env.PUBLIC_URL+FAVORITES_PATH} render={() => <FavoritesPage/>}/>
+                        <Route path={'/#/' +FAVORITES_PATH} render={() => <FavoritesPage/>}/>
                         <Route path={process.env.PUBLIC_URL+FIND_IMAGE_PATH} render={() => <FindPage/>}/>
                         <Route render={() => <Error404/>}/>
                     </Switch>
