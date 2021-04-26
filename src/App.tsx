@@ -19,24 +19,19 @@ export const FAVORITES_PATH = '/favor';
 const App = () => {
 
     return (
-        <HashRouter>
-            <Provider store={store}>
+        <Provider store={store}>
+            <HashRouter>
                 <div className={style.app}>
                     <Header/>
                     <div className={style.appHeader}>
                         <div className={style.table}>
-                                <Navigation/>
+                            <Navigation/>
                             <Switch>
+                                <Route exact path={"/"} render={() => <FindPage/>}/>
                                 <Route exact path={'/favor'}
                                        render={() => <FavoritesPage/>}
                                     // component={FavoritesPage}
-
                                 />
-                                {/*<Route  exact path={'/find'}*/}
-                                {/*        // render={() => <FindPage/>}*/}
-                                {/*        component={FindPage}*/}
-                                {/*/>*/}
-                                <Route exact path={"/"} render={() => <FindPage/>}/>
                                 <Route render={() => <Error404/>}/>
                             </Switch>
                             {/*<Switch>*/}
@@ -49,8 +44,8 @@ const App = () => {
                         <Footer/>
                     </div>
                 </div>
-            </Provider>
-        </HashRouter>
+            </HashRouter>
+        </Provider>
     );
 }
 
