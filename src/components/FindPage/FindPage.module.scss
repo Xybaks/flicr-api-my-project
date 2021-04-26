@@ -1,25 +1,19 @@
 
-
-.findPageContainer{
+.findPageContainer {
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  margin:10px;
-    .input{
-      margin-bottom: 10px;
-    }
-  .photos{
+  margin: 10px;
+
+  .input {
+    margin-bottom: 10px;
+  }
+  .photos {
     display: flex;
     //flex-direction: row ;
-    justify-content:space-around;
+    justify-content: space-around;
     flex-wrap: wrap;
     align-content: center;
   }
-  .button{
-    margin:10px;
-  }
-}
-.warn{
-  max-width: 200px;
 }

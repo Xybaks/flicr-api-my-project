@@ -5,6 +5,7 @@ import {Photo} from "../../common/components/Photo/Photo";
 import {isPhotoFavorite} from "../../common/functions/isPhotoFavorite";
 import styles from "./FavofitesPage.module.scss"
 import React from "react";
+import MyAlert from "../../common/components/MyAlert/MyAlert";
 
 export const FavoritesPage = () => {
 
@@ -16,7 +17,7 @@ export const FavoritesPage = () => {
             <div className={styles.photos}>
                 {favoritePhotosPage.favorite.length === 0
                     ?
-                    <div> You don't have any favorite photos.</div>
+                    <MyAlert errorMessage={" No favorite photos "} isOpen={true}/>
                     :
                     <></>
                 }

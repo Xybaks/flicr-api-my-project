@@ -7,9 +7,10 @@ import ProgressIndicator from "../../common/components/ProgressIndicator/Progres
 import {MyPaginator} from "../MyPaginator/MyPaginator";
 import {isPhotoFavorite} from "../../common/functions/isPhotoFavorite";
 import styles from "./FindPage.module.scss"
-import { Button, Grid, TextField} from "@material-ui/core";
+import {Button, Grid, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import MyAlert from "./MyAlert";
+import MyAlert from "../../common/components/MyAlert/MyAlert";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,7 +69,10 @@ export default function FindPage() {
     }
 
     return <div className={styles.findPageContainer}>
-        {!photos.isGettingPhotosSuccess && <MyAlert open={true}/>}
+        {
+            !photos.isGettingPhotosSuccess &&
+            <MyAlert errorMessage={" Empty result of the searsh :( "} isOpen={true}/>
+        }
         <div className={classes.container1}>
             <Grid container>
                 <Grid className={classes.item} item xs={8}>
@@ -92,7 +96,6 @@ export default function FindPage() {
                         color="primary"
                         size="large"
                     >FIND</Button>
-                    {/*</div>*/}
                 </Grid>
             </Grid>
         </div>

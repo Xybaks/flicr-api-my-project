@@ -5,12 +5,13 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 type MyAlertPropsType = {
-    open: boolean
+    isOpen: boolean
+    errorMessage:string
 }
 
 export default function MyAlert(props: MyAlertPropsType) {
 
-    const [open, setOpen] = React.useState(props.open);
+    const [open, setOpen] = React.useState(props.isOpen);
 
     const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
         if (reason === 'clickaway') {
@@ -30,7 +31,7 @@ export default function MyAlert(props: MyAlertPropsType) {
                 open={open}
                 autoHideDuration={3000}
                 onClose={handleClose}
-                message="Empty result of the searsh =("
+                message= {props.errorMessage}
                 action={
                     <React.Fragment>
                         <Button color="secondary" size="small" onClick={handleClose}>
