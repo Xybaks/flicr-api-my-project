@@ -16,5 +16,3 @@ export type ActionsType =PhotosReducerActionsType | FavoriteReducerActionsType
 
 export type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsType>
 
-// @ts-ignore
-window.store = store;

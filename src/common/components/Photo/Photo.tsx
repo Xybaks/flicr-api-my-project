@@ -10,7 +10,7 @@ type PhotoPropsType = {
     photo: PhotoInStoreType
     isFavorite?: boolean
 }
-export const Photo: FC<PhotoPropsType> = (props) => {
+export const Photo: FC<PhotoPropsType> = React.memo((props) => {
     const {farm, tags, id, secret, server} = props.photo
     const dispatch = useDispatch()
     const [tagInput, setTagInput] = useState("")
@@ -51,7 +51,7 @@ export const Photo: FC<PhotoPropsType> = (props) => {
     }
 
     const imgSrc = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg)`
-
+    console.log("new Photo was rendered")
     return (
         <div className={styles.photoContainer}>
             <img className={styles.photoImage} src={imgSrc} alt="img is loading :)"/>
@@ -80,4 +80,4 @@ export const Photo: FC<PhotoPropsType> = (props) => {
             />
         </div>
     )
-}
+})

@@ -1,7 +1,7 @@
 import style from './App.module.scss';
 import {Route, Switch} from 'react-router-dom';
 import {Navigation} from "./components/Navigation/Navigation";
-import {FindPage} from './components/FindPage/FindPage';
+import FindPage from './components/FindPage/FindPage';
 import Error404 from './components/Error404/Error404';
 import {FavoritesPage} from "./components/FavoritesPage/FavoritesPage";
 import {Header} from "./components/Header/Header";
