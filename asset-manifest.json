@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/flicr-api-my-project/static/css/main.d740bb2d.chunk.css",
-    "main.js": "/flicr-api-my-project/static/js/main.b957c01a.chunk.js",
-    "main.js.map": "/flicr-api-my-project/static/js/main.b957c01a.chunk.js.map",
-    "runtime-main.js": "/flicr-api-my-project/static/js/runtime-main.45a29ce9.js",
-    "runtime-main.js.map": "/flicr-api-my-project/static/js/runtime-main.45a29ce9.js.map",
-    "static/js/2.8c1effb6.chunk.js": "/flicr-api-my-project/static/js/2.8c1effb6.chunk.js",
-    "static/js/2.8c1effb6.chunk.js.map": "/flicr-api-my-project/static/js/2.8c1effb6.chunk.js.map",
-    "static/js/3.4bd5838e.chunk.js": "/flicr-api-my-project/static/js/3.4bd5838e.chunk.js",
-    "static/js/3.4bd5838e.chunk.js.map": "/flicr-api-my-project/static/js/3.4bd5838e.chunk.js.map",
+    "main.css": "/flicr-api-my-project/static/css/main.80426351.chunk.css",
+    "main.js": "/flicr-api-my-project/static/js/main.4b51c763.chunk.js",
+    "main.js.map": "/flicr-api-my-project/static/js/main.4b51c763.chunk.js.map",
+    "runtime-main.js": "/flicr-api-my-project/static/js/runtime-main.2f9ecfaa.js",
+    "runtime-main.js.map": "/flicr-api-my-project/static/js/runtime-main.2f9ecfaa.js.map",
+    "static/js/2.2cbfd52d.chunk.js": "/flicr-api-my-project/static/js/2.2cbfd52d.chunk.js",
+    "static/js/2.2cbfd52d.chunk.js.map": "/flicr-api-my-project/static/js/2.2cbfd52d.chunk.js.map",
+    "static/js/3.6f42fa8b.chunk.js": "/flicr-api-my-project/static/js/3.6f42fa8b.chunk.js",
+    "static/js/3.6f42fa8b.chunk.js.map": "/flicr-api-my-project/static/js/3.6f42fa8b.chunk.js.map",
     "index.html": "/flicr-api-my-project/index.html",
-    "static/css/main.d740bb2d.chunk.css.map": "/flicr-api-my-project/static/css/main.d740bb2d.chunk.css.map",
-    "static/js/2.8c1effb6.chunk.js.LICENSE.txt": "/flicr-api-my-project/static/js/2.8c1effb6.chunk.js.LICENSE.txt"
+    "static/css/main.80426351.chunk.css.map": "/flicr-api-my-project/static/css/main.80426351.chunk.css.map",
+    "static/js/2.2cbfd52d.chunk.js.LICENSE.txt": "/flicr-api-my-project/static/js/2.2cbfd52d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.45a29ce9.js",
-    "static/js/2.8c1effb6.chunk.js",
-    "static/css/main.d740bb2d.chunk.css",
-    "static/js/main.b957c01a.chunk.js"
+    "static/js/runtime-main.2f9ecfaa.js",
+    "static/js/2.2cbfd52d.chunk.js",
+    "static/css/main.80426351.chunk.css",
+    "static/js/main.4b51c763.chunk.js"
   ]
 }
