@@ -9,8 +9,8 @@ import {Footer} from "./components/Footer/Footer";
 
 
 // PATH
-export const FIND_IMAGE_PATH = "/find";
-export const FAVORITES_PATH = "/favor";
+export const FIND_IMAGE_PATH = '/find';
+export const FAVORITES_PATH = '/favor';
 
 
 const App = () => {
@@ -22,10 +22,12 @@ const App = () => {
                 <div className={style.table}>
                     <Navigation/>
                     <Switch>
-                        <Route exact path={"/"} render={() => <FindPage/>}/>
-                        <Route path={process.env.PUBLIC_URL + FAVORITES_PATH} render={() => <FavoritesPage/>}/>
-                        <Route path={process.env.PUBLIC_URL + FIND_IMAGE_PATH} render={() => <FindPage/>}/>
+
+                        {/*<Route exact path={process.env.PUBLIC_URL +'/'} render={() => <FindPage/>}/>*/}
+                        <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
+                        <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
                         <Route render={() => <Error404/>}/>
+                        <Route exact path={'/'} render={() => <FindPage/>}/>
                     </Switch>
                 </div>
                 <Footer/>
