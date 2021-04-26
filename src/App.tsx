@@ -10,7 +10,7 @@ import {Footer} from "./components/Footer/Footer";
 
 // PATH
 export const FIND_IMAGE_PATH = "/find";
-export const FAVORITES_PATH = "/favorites";
+export const FAVORITES_PATH = "/favorite";
 
 
 const App = () => {
