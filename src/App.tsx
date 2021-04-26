@@ -21,12 +21,15 @@ const App = () => {
             <div className={style.appHeader}>
                 <div className={style.table}>
                     <Navigation/>
-                    <Switch>
                         <Route exact path={"/"} render={() => <FindPage/>}/>
                         <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>
                         <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>
-                        <Route render={() => <Error404/>}/>
-                    </Switch>
+                    {/*<Switch>*/}
+                    {/*    <Route exact path={"/"} render={() => <FindPage/>}/>*/}
+                    {/*    <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>*/}
+                    {/*    <Route path={FIND_IMAGE_PATH} render={() => <FindPage/>}/>*/}
+                    {/*    <Route render={() => <Error404/>}/>*/}
+                    {/*</Switch>*/}
                 </div>
                 <Footer/>
             </div>

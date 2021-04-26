@@ -6,7 +6,6 @@ import CloudIcon from '@material-ui/icons/Cloud';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 
 export const Navigation = () => {
-
     return (
         <div className={styles.navBlock}>
             <NavLink to={FIND_IMAGE_PATH}>
