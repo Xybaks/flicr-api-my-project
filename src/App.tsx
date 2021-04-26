@@ -25,10 +25,20 @@ const App = () => {
                     <Header/>
                     <div className={style.appHeader}>
                         <div className={style.table}>
-                            <Navigation/>
-                            <Route exact path={'/favor'} render={() => <FavoritesPage/>}/>
-                            <Route  exact path={'/find'} render={() => <FindPage/>}/>
-                            <Route exact path={"/"} render={() => <FindPage/>}/>
+                                <Navigation/>
+                            <Switch>
+                                <Route exact path={'/favor'}
+                                       render={() => <FavoritesPage/>}
+                                    // component={FavoritesPage}
+
+                                />
+                                {/*<Route  exact path={'/find'}*/}
+                                {/*        // render={() => <FindPage/>}*/}
+                                {/*        component={FindPage}*/}
+                                {/*/>*/}
+                                <Route exact path={"/"} render={() => <FindPage/>}/>
+                                <Route render={() => <Error404/>}/>
+                            </Switch>
                             {/*<Switch>*/}
                             {/*    <Route exact path={"/"} render={() => <FindPage/>}/>*/}
                             {/*    <Route path={FAVORITES_PATH} render={() => <FavoritesPage/>}/>*/}

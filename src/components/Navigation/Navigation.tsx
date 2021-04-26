@@ -8,7 +8,7 @@ import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 export const Navigation = () => {
     return (
         <div className={styles.navBlock}>
-            <NavLink to={'/find'}>
+            <NavLink to={'/'}>
                 <CloudIcon fontSize={"large"}/>
             </NavLink>
             <NavLink to={'/favor'}>
