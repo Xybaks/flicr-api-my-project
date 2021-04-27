@@ -1,14 +1,19 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import {makeStyles} from "@material-ui/core/styles";
 
 type MyAlertPropsType = {
     isOpen: boolean
-    errorMessage:string
+    errorMessage: string
 }
-
+const useStyles = makeStyles({
+    root: {
+        maxWidth: "200px",
+    },
+    label: {maxWidth: "100%"}, 
+});
 export default function MyAlert(props: MyAlertPropsType) {
 
     const [open, setOpen] = React.useState(props.isOpen);
@@ -20,29 +25,25 @@ export default function MyAlert(props: MyAlertPropsType) {
 
         setOpen(false);
     };
-
+    const classes = useStyles();
     return (
-        <div>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                open={open}
-                autoHideDuration={3000}
-                onClose={handleClose}
-                message= {props.errorMessage}
-                action={
-                    <React.Fragment>
-                        <Button color="secondary" size="small" onClick={handleClose}>
-                            UNDO
-                        </Button>
-                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                            <CloseIcon fontSize="small"/>
-                        </IconButton>
-                    </React.Fragment>
-                }
+            <Snackbar className={classes.root}
+                      anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'left',
+                      }}
+                      open={open}
+                      autoHideDuration={3000}
+                      onClose={handleClose}
+                      message={props.errorMessage}
+                      action={<IconButton
+                          className={classes.label} size="small"
+                          aria-label="close"
+                          color="inherit"
+                          onClick={handleClose}>
+                                  <CloseIcon fontSize="small"/>
+                              </IconButton>
+                      }
             />
-        </div>
     );
 }
