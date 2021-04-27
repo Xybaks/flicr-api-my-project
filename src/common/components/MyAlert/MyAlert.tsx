@@ -10,9 +10,9 @@ type MyAlertPropsType = {
 }
 const useStyles = makeStyles({
     root: {
-        maxWidth: "200px",
+        maxWidth: "230px",
     },
-    label: {maxWidth: "100%"}, 
+    label: {maxWidth: "100%"},
 });
 export default function MyAlert(props: MyAlertPropsType) {
 
